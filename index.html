@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <div class="svg">
+
+    </div>
+    <button onclick="get()">测试</button>
+</head>
+
+<body>
+
+
+</body>
+
+<script>
+    fetch('/login/captcha', { withCredentials: true })
+        .then(res => res.text())
+        .then(data => {
+            // 将svg 渲染到页面
+            document.querySelector('.svg').innerHTML = data
+
+        })
+
+    function get() {
+        fetch('/login/verify', {
+            withCredentials: true,
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                captcha: '1234'
+            })
+        })
+            .then(res => res.text())
+            .then(data => {
+                console.log(data)
+            })
+
+    }
+
+
+
+</script>
+
+</html>
