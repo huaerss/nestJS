@@ -1,7 +1,9 @@
+import { Info } from './info.entity';
 import {
   Column,
   CreateDateColumn,
   Entity,
+  OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
 @Entity()
@@ -14,4 +16,6 @@ export class Login {
   password: string;
   @CreateDateColumn({ type: 'timestamp', comment: '创建时间' }) // 创建时间
   createTime: Date;
+  @OneToMany(() => Info, (info) => info.Login)
+  info: Info;
 }
