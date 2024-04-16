@@ -5,7 +5,7 @@ import { Request, Response, NextFunction } from 'express';
 import * as session from 'express-session';
 
 function GobalMiddleware(req: Request, res: Response, next: NextFunction) {
-  console.log('全局中间件');
+  // console.log('全局中间件');
   next();
 }
 

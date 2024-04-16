@@ -13,6 +13,7 @@ export class UploadController {
   @Post('file')
   @UseInterceptors(FileInterceptor('file'))
   upload(@UploadedFile() file) {
+    console.log(file);
     return '上传文件';
   }
 }
