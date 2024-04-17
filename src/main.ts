@@ -3,6 +3,7 @@ import { AppModule } from './app.module';
 import { NestExpressApplication } from '@nestjs/platform-express';
 import { Request, Response, NextFunction } from 'express';
 import * as session from 'express-session';
+import { filter } from './common/filter';
 
 function GobalMiddleware(req: Request, res: Response, next: NextFunction) {
   // console.log('全局中间件');
@@ -14,6 +15,7 @@ async function bootstrap() {
   app.enableCors();
   app.useStaticAssets('public');
   app.use(GobalMiddleware);
+  app.useGlobalFilters(new filter());
   app.use(
     session({
       secret: 'gyh',
