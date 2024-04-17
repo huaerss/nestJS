@@ -4,9 +4,10 @@ import { LoginController } from './login.controller';
 import { LoggerMiddleware } from 'src/logger/logger.middleware';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Login } from './entities/login.entity';
+import { Info } from './entities/info.entity';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Login])],
+  imports: [TypeOrmModule.forFeature([Login, Info])],
   controllers: [LoginController],
   providers: [LoginService],
 })

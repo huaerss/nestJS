@@ -10,10 +10,11 @@ import {
   Put,
   Delete,
 } from '@nestjs/common';
-import { Response, Request, query } from 'express';
+import { Response, Request } from 'express';
 import { LoginService } from './login.service';
 import { CreateLoginDto } from './dto/create-login.dto';
 import { UpdateLoginDto } from './dto/update-login.dto';
+import { get } from 'http';
 
 @Controller('login')
 export class LoginController {
@@ -28,8 +29,6 @@ export class LoginController {
   }
   @Post('verify')
   verify(@Session() session, @Body() body, @Res() res: Response) {
-    console.log(body.captcha);
-    console.log(session.code);
     res.send('ok');
   }
   @Post('user')
@@ -43,7 +42,6 @@ export class LoginController {
     @Query() query: { keywork: string; page: number; pageSize: number },
     @Res() res: Response,
   ) {
-    console.log(query);
     const data = await this.loginService.findAll(query);
     res.send(data);
   }
@@ -55,6 +53,17 @@ export class LoginController {
   @Delete('user')
   async remove(@Query('id') id: number, @Res() res: Response) {
     const data = await this.loginService.remove(id);
+    res.send(data);
+  }
+  @Post('msg')
+  async msg(@Body() infoDto, @Res() res: Response) {
+    console.log(infoDto);
+    this.loginService.addmsg(infoDto);
+    res.send('ok');
+  }
+  @Get('msg')
+  async getmsg(@Query('loginId') loginId: number, @Res() res: Response) {
+    const data = await this.loginService.finmsg(loginId);
     res.send(data);
   }
 }
