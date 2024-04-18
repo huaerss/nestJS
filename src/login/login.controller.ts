@@ -14,7 +14,7 @@ import { Response, Request } from 'express';
 import { LoginService } from './login.service';
 import { CreateLoginDto } from './dto/create-login.dto';
 import { UpdateLoginDto } from './dto/update-login.dto';
-import { get } from 'http';
+import { checkDTo } from './dto/check-login.dto';
 
 @Controller('login')
 export class LoginController {
@@ -57,13 +57,12 @@ export class LoginController {
   }
   @Post('msg')
   async msg(@Body() infoDto, @Res() res: Response) {
-    console.log(infoDto);
     this.loginService.addmsg(infoDto);
     res.send('ok');
   }
   @Get('msg')
-  async getmsg(@Query('loginId') loginId: number, @Res() res: Response) {
-    const data = await this.loginService.finmsg(loginId);
+  async getmsg(@Query() loginId: checkDTo, @Res() res: Response) {
+    const data = await this.loginService.finmsg(loginId.id);
     res.send(data);
   }
 }

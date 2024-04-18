@@ -4,9 +4,8 @@ import { NestExpressApplication } from '@nestjs/platform-express';
 import { Request, Response, NextFunction } from 'express';
 import * as session from 'express-session';
 import { filter } from './common/filter';
-
+import { ValidationPipe } from '@nestjs/common';
 function GobalMiddleware(req: Request, res: Response, next: NextFunction) {
-  // console.log('全局中间件');
   next();
 }
 
@@ -16,6 +15,7 @@ async function bootstrap() {
   app.useStaticAssets('public');
   app.use(GobalMiddleware);
   app.useGlobalFilters(new filter());
+  app.useGlobalPipes(new ValidationPipe());
   app.use(
     session({
       secret: 'gyh',
