@@ -5,7 +5,13 @@ import { Request, Response, NextFunction } from 'express';
 import * as session from 'express-session';
 import { filter } from './common/filter';
 import { ValidationPipe } from '@nestjs/common';
+
 function GobalMiddleware(req: Request, res: Response, next: NextFunction) {
+  // 配置白名单路径
+  const whiteList = ['/auth', '/auth/profile'];
+  if (whiteList.includes(req.path)) {
+    return next();
+  }
   next();
 }
 

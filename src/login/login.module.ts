@@ -10,6 +10,7 @@ import { Info } from './entities/info.entity';
   imports: [TypeOrmModule.forFeature([Login, Info])],
   controllers: [LoginController],
   providers: [LoginService],
+  exports: [LoginService], // 导出 LoginService
 })
 export class LoginModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {

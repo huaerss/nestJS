@@ -30,14 +30,13 @@ export class LoginService {
     data.password = createLoginDto.password;
     return this.lgoin.save(data);
   }
-  async findAll(query: { keywork: string; page: number; pageSize: number }) {
-    console.log(query);
+  async findAll(query: { keywork: string; page?: number; pageSize?: number }) {
     const data = await this.lgoin.find({
       // 如果keywork有值就查询 否则查询全部
       where: {
         username: Like(`%${query.keywork ?? ''}%`),
       },
-      relations: ['info'],
+      // relations: ['info'],
       order: {
         id: 'DESC', // 降序 默认为asc
       },
