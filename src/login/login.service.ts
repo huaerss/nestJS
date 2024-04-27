@@ -24,11 +24,12 @@ export class LoginService {
     return data;
   }
 
-  create(createLoginDto: CreateLoginDto) {
+  async create(createLoginDto: CreateLoginDto) {
     const data = new Login();
     data.username = createLoginDto.username;
     data.password = createLoginDto.password;
-    return this.lgoin.save(data);
+    await this.lgoin.save(data);
+    return '注册成功!';
   }
   async findAll(query: { keywork: string; page?: number; pageSize?: number }) {
     const data = await this.lgoin.find({

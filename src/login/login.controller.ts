@@ -27,14 +27,15 @@ export class LoginController {
     res.type('svg');
     res.send(captcha.data);
   }
+
   @Post('verify')
   verify(@Session() session, @Body() body, @Res() res: Response) {
     res.send('ok');
   }
+
   @Post('user')
   async created(@Body() createLoginDto: CreateLoginDto, @Res() res: Response) {
     const data = await this.loginService.create(createLoginDto);
-    console.log('data', data);
     res.send(data);
   }
   @Get('user')

@@ -10,6 +10,7 @@ export class AuthController {
   sigin(@Body() info: { username: string; password: string }) {
     return this.authService.signin(info);
   }
+
   @UseGuards(AuthGuard)
   @Post('profile')
   getProfile(@Request() req) {
