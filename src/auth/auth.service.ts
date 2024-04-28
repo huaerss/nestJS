@@ -11,7 +11,6 @@ export class AuthService {
     const {
       data: [user],
     } = await this.loginService.findAll({ keywork: info.username });
-    console.log(user);
     if (!user) {
       throw new UnauthorizedException('账号或密码错误');
     }

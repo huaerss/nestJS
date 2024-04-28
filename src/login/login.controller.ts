@@ -42,7 +42,9 @@ export class LoginController {
   async finall(
     @Query() query: { keywork: string; page: number; pageSize: number },
     @Res() res: Response,
+    @Req() req: Request,
   ) {
+    console.log(req.user);
     const data = await this.loginService.findAll(query);
     res.send(data);
   }
