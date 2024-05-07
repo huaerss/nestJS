@@ -5,6 +5,7 @@ import { LoginModule } from './login/login.module';
 import { UploadModule } from './upload/upload.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AuthModule } from './auth/auth.module';
+import { SocketModule } from './socket/socket.module';
 
 @Module({
   imports: [
@@ -25,6 +26,7 @@ import { AuthModule } from './auth/auth.module';
       migrationsRun: true, //是否自动运行迁移
     }),
     AuthModule,
+    SocketModule,
   ],
   controllers: [AppController], // 路由
   providers: [AppService], // 服务

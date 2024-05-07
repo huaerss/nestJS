@@ -12,9 +12,6 @@ function GobalMiddleware(req: Request, res: Response, next: NextFunction) {
   if (whiteList.includes(req.path)) {
     return next();
   }
-  // 如果请求头中带有Authorization 则验证token
-  if (req.headers.authorization) {
-  }
 
   next();
 }
