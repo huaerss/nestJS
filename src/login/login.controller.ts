@@ -15,10 +15,21 @@ import { LoginService } from './login.service';
 import { CreateLoginDto } from './dto/create-login.dto';
 import { UpdateLoginDto } from './dto/update-login.dto';
 import { checkDTo } from './dto/check-login.dto';
+import { SocketService } from 'src/socket/socket.service';
+import { Public } from 'src/common/public';
 
 @Controller('login')
 export class LoginController {
-  constructor(private readonly loginService: LoginService) {}
+  constructor(
+    private readonly loginService: LoginService,
+    private readonly socketService: SocketService,
+  ) {}
+  @Public()
+  @Get('initPlayer')
+  initPlay(@Res() res: Response) {
+    res.send(this.socketService.getMoveData());
+  }
+
   @Get('captcha')
   getCaptcha(@Req() req: Request, @Res() res: Response, @Session() session) {
     const captcha = this.loginService.getCaptcha();
